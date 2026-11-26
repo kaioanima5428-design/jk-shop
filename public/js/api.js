@@ -11,7 +11,7 @@
  * Para trocar o destino (tunnel, por exemplo), altere apenas API_URL.
  */
 
-export const API_URL = "http://jk.caiomultiversando.com.br";
+export const API_URL = "https://jk.caiomultiversando.com.br";
 
 /**
  * Junta a URL base com um caminho, removendo barras duplicadas.
