@@ -1,0 +1,413 @@
+/* ============================================================
+   PASSE BOOYAH — FLUXO (compra / status do pedido)
+   Base compartilhada das telas de compra e acompanhamento.
+   ============================================================ */
+
+:root {
+  --bg-primary: #09090f;
+  --bg-secondary: #12111a;
+  --yellow: #ffc400;
+  --yellow-soft: #ffda35;
+  --purple: #8b35f5;
+  --white: #f5f5f5;
+  --gray: #a5a1ae;
+  --ink: #06060a;
+
+  --font-display: "Black Ops One", "Russo One", system-ui, sans-serif;
+  --font-heading: "Russo One", "Black Ops One", system-ui, sans-serif;
+  --font-body: "Rajdhani", system-ui, sans-serif;
+
+  --container: 30rem;
+  --gutter: clamp(1rem, 4.5vw, 2rem);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(139, 53, 245, 0.2), transparent 60%),
+    var(--bg-primary);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+}
+
+/* ------------------------------------------------------------
+   Header
+   ------------------------------------------------------------ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem var(--gutter);
+  background: rgba(5, 5, 8, 0.85);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.site-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.site-brand__mark {
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--yellow);
+  filter: drop-shadow(0 0 8px rgba(255, 196, 0, 0.45));
+}
+
+.site-brand__name {
+  font-family: var(--font-heading);
+  font-style: italic;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.95rem;
+  transform: skewX(-6deg);
+}
+
+.site-back {
+  color: var(--gray);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
+}
+
+.site-back:hover {
+  color: var(--yellow);
+}
+
+/* ------------------------------------------------------------
+   Layout
+   ------------------------------------------------------------ */
+.page {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: clamp(1.5rem, 5vw, 3rem) var(--gutter) clamp(3rem, 10vw, 5rem);
+}
+
+.page__title {
+  margin: 0 0 0.35rem;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.7rem, 8vw, 2.6rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  transform: skewX(-4deg);
+}
+
+.page__title span {
+  color: var(--yellow);
+}
+
+.page__subtitle {
+  margin: 0 0 1.75rem;
+  color: var(--gray);
+  font-size: 1rem;
+}
+
+/* ------------------------------------------------------------
+   Formulário
+   ------------------------------------------------------------ */
+.field {
+  margin-bottom: 1.25rem;
+}
+
+.field__label {
+  display: block;
+  margin-bottom: 0.45rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gray);
+}
+
+.field__input {
+  width: 100%;
+  height: 3.25rem;
+  padding: 0 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid #2b2b35;
+  border-radius: 0.6rem;
+  color: var(--white);
+  font-weight: 600;
+  font-size: 1.05rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field__input::placeholder {
+  color: #6e6a79;
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--yellow);
+  box-shadow: 0 0 0 3px rgba(255, 196, 0, 0.18);
+}
+
+/* ------------------------------------------------------------
+   Botões
+   ------------------------------------------------------------ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  width: 100%;
+  min-height: 3.25rem;
+  padding: 0.8rem 1.2rem;
+  border: 0;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  transition: transform 0.15s ease, filter 0.15s ease, opacity 0.15s ease;
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px) scale(0.995);
+}
+
+.btn--primary {
+  background: linear-gradient(180deg, var(--yellow-soft), var(--yellow));
+  color: #000;
+}
+
+.btn--primary:hover:not(:disabled) {
+  filter: brightness(1.05);
+}
+
+.btn--ghost {
+  background: transparent;
+  border: 1px solid #2b2b35;
+  color: var(--white);
+}
+
+.btn--ghost:hover:not(:disabled) {
+  border-color: var(--yellow);
+  color: var(--yellow);
+}
+
+.btn + .btn {
+  margin-top: 0.8rem;
+}
+
+/* ------------------------------------------------------------
+   Card de confirmação do jogador
+   ------------------------------------------------------------ */
+.conta-card {
+  display: none;
+  margin-top: 1.5rem;
+  padding: 1.15rem 1.25rem;
+  background: linear-gradient(160deg, #171620, #0e0d14);
+  border: 1px solid rgba(255, 196, 0, 0.22);
+  border-radius: 0.75rem;
+}
+
+.conta-card.is-visible {
+  display: block;
+}
+
+.conta-card__name {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.conta-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.7rem;
+}
+
+.conta-card__tag {
+  padding: 0.2rem 0.6rem;
+  background: rgba(255, 196, 0, 0.1);
+  border: 1px solid rgba(255, 196, 0, 0.25);
+  border-radius: 999px;
+  color: var(--yellow);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.conta-card__confirm {
+  margin: 0.7rem 0 0;
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+
+/* ------------------------------------------------------------
+   Mensagens de status / erro
+   ------------------------------------------------------------ */
+.status {
+  margin-top: 1.25rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.6rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  min-height: 1.2em;
+}
+
+.status:empty {
+  display: none;
+}
+
+.status--info {
+  background: rgba(139, 53, 245, 0.12);
+  border: 1px solid rgba(139, 53, 245, 0.3);
+  color: #cfb7ff;
+}
+
+.status--ok {
+  background: rgba(255, 196, 0, 0.1);
+  border: 1px solid rgba(255, 196, 0, 0.3);
+  color: var(--yellow-soft);
+}
+
+.status--erro {
+  background: rgba(201, 74, 92, 0.12);
+  border: 1px solid rgba(201, 74, 92, 0.3);
+  color: #ff8b9b;
+}
+
+/* ------------------------------------------------------------
+   Tela de status do pedido
+   ------------------------------------------------------------ */
+.pedido-meta {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  color: var(--gray);
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+}
+
+.pedido-meta code {
+  color: var(--yellow);
+  font-weight: 700;
+}
+
+/* ------------------------------------------------------------
+   Fluxo de pagamento (Pix)
+   ------------------------------------------------------------ */
+.pix {
+  margin-top: 1.75rem;
+  padding: 1.25rem;
+  background: linear-gradient(160deg, #171620, #0e0d14);
+  border: 1px solid rgba(255, 196, 0, 0.22);
+  border-radius: 0.9rem;
+  text-align: center;
+}
+
+.pix__qr {
+  width: min(72vw, 16rem);
+  aspect-ratio: 1 / 1;
+  margin-inline: auto;
+  padding: 0.75rem;
+  background: #fff;
+  border-radius: 0.75rem;
+}
+
+.pix__hint {
+  margin: 0.9rem 0 0;
+  color: var(--gray);
+  font-size: 0.95rem;
+}
+
+.pix__copy-row {
+  display: flex;
+  gap: 0.6rem;
+  align-items: stretch;
+  margin-top: 1rem;
+}
+
+.pix__copy {
+  flex: 1;
+  resize: none;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-secondary);
+  border: 1px solid #2b2b35;
+  border-radius: 0.6rem;
+  color: var(--white);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  line-height: 1.35;
+  word-break: break-all;
+}
+
+.pix__copy-btn {
+  width: auto;
+  flex: 0 0 auto;
+  min-height: auto;
+  padding-inline: 1rem;
+  font-size: 0.85rem;
+}
+
+.pix__link {
+  display: inline-block;
+  margin-top: 0.9rem;
+  color: var(--yellow);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.pix__link:hover {
+  text-decoration: underline;
+}
+
+.pix__status {
+  margin-top: 1rem;
+}
+
+/* ------------------------------------------------------------
+   Responsivo
+   ------------------------------------------------------------ */
+@media (min-width: 720px) {
+  .page {
+    padding-top: 4rem;
+  }
+}

@@ -1,0 +1,675 @@
+/* ============================================================
+   PASSE BOOYAH — LANDING PAGE
+   Identidade visual: Free Fire (gamer / cinematográfica)
+   Mobile-first · HTML semântico · CSS moderno
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   1. Tokens
+   ------------------------------------------------------------ */
+:root {
+  --bg-primary: #09090f;
+  --bg-secondary: #12111a;
+  --yellow: #ffc400;
+  --yellow-soft: #ffda35;
+  --purple: #8b35f5;
+  --white: #f5f5f5;
+  --gray: #a5a1ae;
+
+  --ink: #06060a;
+
+  --font-display: "Black Ops One", "Russo One", system-ui, sans-serif;
+  --font-heading: "Russo One", "Black Ops One", system-ui, sans-serif;
+  --font-body: "Rajdhani", system-ui, sans-serif;
+
+  --container: 1200px;
+  --gutter: clamp(1rem, 4.5vw, 2.5rem);
+
+  --header-h: 4.25rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+}
+
+/* ------------------------------------------------------------
+   2. Reset / base
+   ------------------------------------------------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(139, 53, 245, 0.22), transparent 60%),
+    var(--bg-primary);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.4;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+img,
+svg,
+canvas {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
+
+/* ------------------------------------------------------------
+   3. CABEÇALHO
+   ------------------------------------------------------------ */
+.header {
+  position: relative;
+  z-index: 10;
+  background: #050508;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.header__inner {
+  min-height: var(--header-h);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0 var(--gutter);
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--white);
+}
+
+.brand__mark {
+  width: 2rem;
+  height: 2rem;
+  color: var(--yellow);
+  filter: drop-shadow(0 0 8px rgba(255, 196, 0, 0.45));
+}
+
+.brand__divider {
+  width: 1px;
+  height: 1.9rem;
+  background: rgba(255, 255, 255, 0.4);
+  transform: skewX(-12deg);
+}
+
+.brand__name {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-style: italic;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  transform: skewX(-6deg);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.6);
+}
+
+/* ------------------------------------------------------------
+   4. HERO / BANNER
+   ------------------------------------------------------------ */
+.hero {
+  position: relative;
+}
+
+.hero__media {
+  position: relative;
+  width: 100%;
+  min-height: min(88svh, 940px);
+  overflow: hidden;
+  background:
+    linear-gradient(180deg, rgba(9, 9, 15, 0.1) 0%, rgba(9, 9, 15, 0.55) 55%, var(--bg-primary) 96%),
+    radial-gradient(90% 55% at 50% 20%, rgba(139, 53, 245, 0.35), transparent 70%);
+  isolation: isolate;
+}
+
+/* Placeholder atmosférico enquanto a imagem real não é fornecida */
+.hero__media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background:
+    radial-gradient(70% 45% at 50% 30%, rgba(255, 196, 0, 0.16), transparent 60%),
+    radial-gradient(50% 40% at 80% 90%, rgba(139, 53, 245, 0.3), transparent 65%),
+    linear-gradient(180deg, #0b0b14 0%, #111019 60%, #09090f 100%);
+}
+
+/* Textura angular sutil (grade diagonal) */
+.hero__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.035) 0,
+      rgba(255, 255, 255, 0.035) 1px,
+      transparent 1px,
+      transparent 34px
+    );
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.9), transparent 70%);
+}
+
+.hero__image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(9, 9, 15, 0.55) 0%, transparent 18%),
+    linear-gradient(0deg, var(--bg-primary) 2%, rgba(9, 9, 15, 0.25) 38%, transparent 62%),
+    linear-gradient(90deg, rgba(9, 9, 15, 0.7) 0%, transparent 18%, transparent 82%, rgba(9, 9, 15, 0.7) 100%);
+}
+
+/* Partículas discretas */
+.hero-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   5. TÍTULO PROMOCIONAL
+   ------------------------------------------------------------ */
+.hero__title {
+  position: absolute;
+  z-index: 3;
+  left: 0;
+  right: 0;
+  bottom: clamp(1rem, 5vh, 3.5rem);
+  padding-inline: var(--gutter);
+  max-width: var(--container);
+  margin-inline: auto;
+  text-align: center;
+  pointer-events: none;
+}
+
+.promo-title {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15em;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  line-height: 0.86;
+}
+
+.promo-title__line {
+  display: block;
+  transform: skewX(-5deg);
+  filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.65));
+}
+
+.promo-title__line--white {
+  color: #fff;
+  font-size: clamp(3.2rem, 19vw, 11rem);
+}
+
+.promo-title__line--yellow {
+  color: var(--yellow);
+  font-size: clamp(3.9rem, 23vw, 13.5rem);
+  -webkit-text-stroke: 0.022em #000;
+}
+
+/* Faixa amarela irregular (pincelada) */
+.promo-strip {
+  display: inline-block;
+  margin-top: 1.2rem;
+  padding: 0.55em 1.15em 0.5em;
+  background: var(--yellow);
+  color: #000;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: clamp(0.8rem, 3.1vw, 1.1rem);
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  line-height: 1.1;
+  transform: skewX(-5deg);
+  clip-path: polygon(2.5% 0, 98.5% 3%, 100% 100%, 0 96%);
+  box-shadow: 0 8px 30px rgba(255, 196, 0, 0.25);
+}
+
+/* ------------------------------------------------------------
+   6. DIFERENCIAIS
+   ------------------------------------------------------------ */
+.differentials {
+  background: var(--bg-secondary);
+  border-top: 1px solid rgba(255, 196, 0, 0.12);
+  border-bottom: 1px solid rgba(255, 196, 0, 0.12);
+}
+
+.differentials__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  max-width: var(--container);
+  margin-inline: auto;
+}
+
+.differentials__item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  padding: 1.4rem 0.4rem 1.5rem;
+  text-align: center;
+}
+
+/* Linhas verticais amarelas separadoras */
+.differentials__item + .differentials__item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 58%;
+  background: linear-gradient(180deg, transparent, rgba(255, 196, 0, 0.55), transparent);
+}
+
+.differentials__icon {
+  width: clamp(2rem, 8vw, 2.6rem);
+  height: clamp(2rem, 8vw, 2.6rem);
+  color: var(--yellow);
+  filter: drop-shadow(0 0 10px rgba(255, 196, 0, 0.4));
+}
+
+.differentials__label {
+  font-family: var(--font-heading);
+  font-size: clamp(0.7rem, 2.7vw, 0.9rem);
+  line-height: 1.1;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+/* ------------------------------------------------------------
+   7. CARD DE RECOMPENSAS
+   ------------------------------------------------------------ */
+.rewards {
+  padding: clamp(1.5rem, 5vw, 3rem) var(--gutter);
+}
+
+.rewards__panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  align-items: center;
+  gap: 1rem;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding: clamp(1.25rem, 4vw, 2.5rem);
+  background: linear-gradient(160deg, #171620, #0e0d14);
+  /* Cantos cortados + contorno irregular por camadas */
+  clip-path: polygon(
+    0 2.2rem,
+    2.2rem 0,
+    calc(100% - 2.2rem) 0,
+    100% 2.2rem,
+    100% calc(100% - 2.2rem),
+    calc(100% - 2.2rem) 100%,
+    2.2rem 100%,
+    0 calc(100% - 2.2rem)
+  );
+}
+
+/* Contorno amarelo irregular */
+.rewards__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--yellow), var(--purple) 55%, var(--yellow-soft));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  clip-path: polygon(
+    0 2.2rem,
+    2.2rem 0,
+    calc(100% - 2.2rem) 0,
+    100% 2.2rem,
+    100% calc(100% - 2.2rem),
+    calc(100% - 2.2rem) 100%,
+    2.2rem 100%,
+    0 calc(100% - 2.2rem)
+  );
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.rewards__copy {
+  position: relative;
+  z-index: 1;
+}
+
+.rewards__title {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.95;
+  letter-spacing: 0.01em;
+  transform: skewX(-3deg);
+}
+
+.rewards__title-line {
+  font-size: clamp(1.5rem, 6.5vw, 3rem);
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.55);
+}
+
+.rewards__title-line + .rewards__title-line {
+  color: var(--yellow);
+}
+
+.rewards__description {
+  margin-top: 0.9rem;
+  color: var(--gray);
+  font-size: clamp(0.95rem, 3.4vw, 1.15rem);
+  max-width: 30ch;
+}
+
+/* Espaço reservado para a ilustração do Passe Booyah */
+.rewards__media {
+  position: relative;
+  align-self: stretch;
+  min-height: 9rem;
+  display: grid;
+  place-items: center;
+}
+
+.rewards__media::before {
+  content: "";
+  position: absolute;
+  inset: 6% 10%;
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(60% 60% at 50% 50%, rgba(255, 196, 0, 0.16), transparent 70%),
+    linear-gradient(180deg, rgba(139, 53, 245, 0.14), transparent);
+  box-shadow:
+    0 0 0 1px rgba(255, 196, 0, 0.18),
+    0 18px 50px rgba(0, 0, 0, 0.5);
+  transform: perspective(700px) rotateY(-14deg) rotateX(4deg);
+}
+
+.rewards__image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  max-height: 15rem;
+  object-fit: contain;
+  object-position: center;
+  transform: perspective(700px) rotateY(-14deg) rotateX(4deg);
+  filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.55));
+}
+
+/* ------------------------------------------------------------
+   8. BOTÃO PRINCIPAL DE CONVERSÃO
+   ------------------------------------------------------------ */
+.cta {
+  padding: 0.5rem var(--gutter) clamp(2rem, 7vw, 4rem);
+}
+
+.cta__button {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  min-height: clamp(3.6rem, 12vw, 4.5rem);
+  padding: 0.9rem 1.4rem;
+  background: linear-gradient(180deg, var(--yellow-soft), var(--yellow));
+  color: #000;
+  font-family: var(--font-heading);
+  font-size: clamp(1.05rem, 4.6vw, 1.5rem);
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  clip-path: polygon(1.6rem 0, 100% 0, calc(100% - 1.6rem) 100%, 0 100%);
+  box-shadow: 0 14px 40px rgba(255, 196, 0, 0.28);
+  transition:
+    transform 0.16s var(--ease-out),
+    box-shadow 0.16s var(--ease-out),
+    filter 0.16s var(--ease-out);
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* Brilho sutil */
+.cta__button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(120deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.cta__button:hover::after {
+  transform: translateX(120%);
+}
+
+.cta__button:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 18px 55px rgba(255, 196, 0, 0.4);
+}
+
+.cta__button:active {
+  transform: translateY(2px) scale(0.99);
+  box-shadow: 0 6px 18px rgba(255, 196, 0, 0.3);
+}
+
+.cta__button:focus-visible {
+  outline: 3px solid var(--purple);
+  outline-offset: 4px;
+}
+
+.cta__label {
+  transform: skewX(-4deg);
+}
+
+.cta__arrow {
+  width: 1.5rem;
+  height: 1.5rem;
+  flex: 0 0 auto;
+  transform: skewX(-4deg);
+  transition: transform 0.18s var(--ease-out);
+}
+
+.cta__button:hover .cta__arrow {
+  transform: translateX(4px) skewX(-4deg);
+}
+
+
+/* ------------------------------------------------------------
+   9. RODAPÉ
+   ------------------------------------------------------------ */
+.footer {
+  background: #050508;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 2.5rem var(--gutter) 3.5rem;
+  text-align: center;
+}
+
+.footer__brand {
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-size: clamp(1.4rem, 6vw, 2rem);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--white);
+}
+
+.footer__dot {
+  color: var(--yellow);
+}
+
+.footer__disclaimer {
+  margin-top: 1rem;
+  color: #6e6a79;
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+
+/* ------------------------------------------------------------
+   10. Animações de entrada
+   ------------------------------------------------------------ */
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hero__media {
+  animation: hero-enter 0.9s var(--ease-out) both;
+}
+
+@keyframes title-rise {
+  from {
+    opacity: 0;
+    transform: translateY(26px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.promo-title__line,
+.promo-strip {
+  animation: title-rise 0.8s var(--ease-out) both;
+}
+
+.promo-title__line:nth-child(1) {
+  animation-delay: 0.15s;
+}
+.promo-title__line:nth-child(2) {
+  animation-delay: 0.25s;
+}
+.promo-strip {
+  animation-delay: 0.4s;
+}
+
+/* ------------------------------------------------------------
+   11. Desktop
+   ------------------------------------------------------------ */
+@media (min-width: 820px) {
+  .hero__media {
+    min-height: min(82vh, 820px);
+    border-inline: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .promo-title__line--white {
+    font-size: clamp(5rem, 11vw, 11rem);
+  }
+  .promo-title__line--yellow {
+    font-size: clamp(6rem, 13vw, 13.5rem);
+  }
+
+  .rewards__panel {
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .header__inner {
+    padding-inline: 1.5rem;
+  }
+}
+
+/* ------------------------------------------------------------
+   12. Acessibilidade: reduzir movimento
+   ------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .hero-particles {
+    display: none;
+  }
+}
+
+/* ------------------------------------------------------------
+   13. Fallback para imagem ausente (antes do asset chegar)
+   ------------------------------------------------------------ */
+img.hero__image:not([src]),
+img.hero__image[src=""],
+img.rewards__image:not([src]),
+img.rewards__image[src=""] {
+  display: none;
+}
